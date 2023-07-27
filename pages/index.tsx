@@ -15,8 +15,8 @@ import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
 
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Navbar from '../components/Navbar'
 
+import Navbar from '../components/Navbar'
 const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter()
   const { photoId } = router.query
@@ -34,6 +34,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
 
   return (
     <>
+    <Navbar />
 
       <Head>
         <title>Next.js Conf 2022 Photos</title>
@@ -178,3 +179,16 @@ export async function getStaticProps() {
     },
   }
 }
+
+
+import React from 'react'
+
+type Props = {}
+
+// const index = (props: Props) => {
+//   return (
+//     <div>index</div>
+//   )
+// }
+
+// export default index

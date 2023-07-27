@@ -5,15 +5,15 @@ export const menuItems = [
     },
     {
       title: 'Contact',
-      url: '/contact',
+      url: '/Contact',
     },
     {
       title: 'About',
-      url: '/about',
+      url: '/About',
     },
     {
       title: 'Gallery',
-      url: '/gallery',
+      url: '/Gallery',
     },
     {
         title: 'Gallery',
@@ -21,11 +21,11 @@ export const menuItems = [
         submenu: [
           {
             title: 'JANGRAD2023',
-            url: 'jangrads',
+            url: 'Jangrads',
           },
           {
             title: 'GradCeremony ',
-            url: 'gradceremony',
+            url: 'Gradceremony',
           },
           {
             title: 'Lovely Students',

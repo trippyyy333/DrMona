@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
 type Props = {}
 
-const gradceremony = ({ images }: { images: ImageProps[] }) => {
+const Gallery = ({ images }: { images: ImageProps[] }) => {
     const router = useRouter()
     const { photoId } = router.query
     const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
@@ -68,12 +68,12 @@ const gradceremony = ({ images }: { images: ImageProps[] }) => {
   )
 }
 
-export default gradceremony
+export default Gallery
 
 
 export async function getStaticProps() {
     const results = await cloudinary.v2.search
-      .expression(`folder:${process.env.CLOUDINARY_FOLDER6}/*`)
+      .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
       .sort_by('public_id', 'desc')
       .max_results(400)
       .execute()

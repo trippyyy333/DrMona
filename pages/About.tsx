@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-const about = (props: Props) => {
+const About = (props: Props) => {
   return (
     <div className="container">
       <div className="grid place-content-center min-h-screen">
@@ -14,4 +14,4 @@ const about = (props: Props) => {
   )
 }
 
-export default about
+export default About

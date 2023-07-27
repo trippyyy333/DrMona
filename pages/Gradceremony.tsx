@@ -8,33 +8,33 @@ import getBase64ImageUrl from '../utils/generateBlurPlaceholder'
 import type { ImageProps } from '../utils/types'
 import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef,useState } from 'react'
 type Props = {}
 
-const gallery = ({ images }: { images: ImageProps[] }) => {
+const Gradceremony = ({ images }: { images: ImageProps[] }) => {
     const router = useRouter()
     const { photoId } = router.query
-    const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
+    const [lastViewedPhoto, setLastViewedPhoto] = useState<string | null>(null);
+
   
     const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
   
     useEffect(() => {
       // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
-      if (lastViewedPhoto && !photoId) {
+      if (lastViewedPhoto && !photoId && lastViewedPhotoRef.current) { // Add the null check here
         lastViewedPhotoRef.current.scrollIntoView({ block: 'center' })
         setLastViewedPhoto(null)
       }
     }, [photoId, lastViewedPhoto, setLastViewedPhoto])
-  
   return (
     <main className="mx-auto max-w-[1960px] p-4">
-    {photoId && (
-      <Modal
-        images={images}
-        onClose={() => {
-          setLastViewedPhoto(photoId)
-        }}
-      />
+{photoId && (
+  <Modal
+    images={images}
+    onClose={() => {
+      setLastViewedPhoto(Array.isArray(photoId) ? photoId[0] : photoId);
+    }}
+  />
     )}
     <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
 
@@ -68,12 +68,12 @@ const gallery = ({ images }: { images: ImageProps[] }) => {
   )
 }
 
-export default gallery
+export default Gradceremony
 
 
 export async function getStaticProps() {
     const results = await cloudinary.v2.search
-      .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
+      .expression(`folder:${process.env.CLOUDINARY_FOLDER6}/*`)
       .sort_by('public_id', 'desc')
       .max_results(400)
       .execute()

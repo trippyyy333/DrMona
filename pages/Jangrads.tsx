@@ -2,40 +2,39 @@ import React from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import Modal from '.././components/Modal'
-import cloudinary from '.././utils/cloudinary'
-import getBase64ImageUrl from '.././utils/generateBlurPlaceholder'
-import type { ImageProps } from '.././utils/types'
-import { useLastViewedPhoto } from '.././utils/useLastViewedPhoto'
+import Modal from '../components/Modal'
+import cloudinary from '../utils/cloudinary'
+import getBase64ImageUrl from '../utils/generateBlurPlaceholder'
+import type { ImageProps } from '../utils/types'
+import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
 import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef,useState } from 'react'
 type Props = {}
 
-const jangrads = ({ images }: { images: ImageProps[] }) => {
+const Jangrads = ({ images }: { images: ImageProps[] }) => {
     const router = useRouter()
     const { photoId } = router.query
-    const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
+    const [lastViewedPhoto, setLastViewedPhoto] = useState<string | null>(null);
+
   
     const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
   
     useEffect(() => {
       // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
-      if (lastViewedPhoto && !photoId) {
+      if (lastViewedPhoto && !photoId && lastViewedPhotoRef.current) { // Add the null check here
         lastViewedPhotoRef.current.scrollIntoView({ block: 'center' })
         setLastViewedPhoto(null)
       }
     }, [photoId, lastViewedPhoto, setLastViewedPhoto])
-  
   return (
-    
     <main className="mx-auto max-w-[1960px] p-4">
-    {photoId && (
-      <Modal
-        images={images}
-        onClose={() => {
-          setLastViewedPhoto(photoId)
-        }}
-      />
+{photoId && (
+  <Modal
+    images={images}
+    onClose={() => {
+      setLastViewedPhoto(Array.isArray(photoId) ? photoId[0] : photoId);
+    }}
+  />
     )}
           <div className="grid place-content-center ">
         <div className="flex flex-col items-center gap-3">
@@ -74,7 +73,7 @@ const jangrads = ({ images }: { images: ImageProps[] }) => {
   )
 }
 
-export default jangrads
+export default Jangrads
 
 
 export async function getStaticProps() {

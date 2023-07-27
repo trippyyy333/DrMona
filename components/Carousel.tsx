@@ -1,50 +1,61 @@
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import useKeypress from 'react-use-keypress'
-import type { ImageProps } from '../utils/types'
-import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
-import SharedModal from './SharedModal'
+// import Image from 'next/image'
+// import { useRouter } from 'next/router'
+// import useKeypress from '@react-typed-hooks/use-key-press'
+// import type { ImageProps } from '../utils/types'
+// import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
+// import SharedModal from './SharedModal'
 
-export default function Carousel({
-  index,
-  currentPhoto,
-}: {
-  index: number
-  currentPhoto: ImageProps
-}) {
-  const router = useRouter()
-  const [, setLastViewedPhoto] = useLastViewedPhoto()
+// export default function Carousel({
+//   index,
+//   currentPhoto,
+// }: {
+//   index: number
+//   currentPhoto: ImageProps
+// }) {
+//   const router = useRouter()
+//   const [, setLastViewedPhoto] = useLastViewedPhoto()
 
-  function closeModal() {
-    setLastViewedPhoto(currentPhoto.id)
-    router.push('/', undefined, { shallow: true })
-  }
+//   function closeModal() {
+//     setLastViewedPhoto(currentPhoto.id)
+//     router.push('/', undefined, { shallow: true })
+//   }
 
-  function changePhotoId(newVal: number) {
-    return newVal
-  }
+//   function changePhotoId(newVal: number) {
+//     return newVal
+//   }
 
-  useKeypress('Escape', () => {
-    closeModal()
-  })
+//   useKeypress('Escape', () => {
+//     closeModal()
+//   })
 
+//   return (
+//     <div className="fixed inset-0 flex items-center justify-center">
+
+//         <Image
+//           src={currentPhoto.blurDataUrl}
+//           className="pointer-events-none h-full w-full"
+//           alt="blurred background"
+//           fill
+//           priority={true}
+//         />
+//       <SharedModal
+//         index={index}
+//         changePhotoId={changePhotoId}
+//         currentPhoto={currentPhoto}
+//         closeModal={closeModal}
+//         navigation={false}
+//       />
+//     </div>
+//   )
+// }
+import React from 'react'
+
+type Props = {}
+
+const Carousel = (props: Props) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
-
-        <Image
-          src={currentPhoto.blurDataUrl}
-          className="pointer-events-none h-full w-full"
-          alt="blurred background"
-          fill
-          priority={true}
-        />
-      <SharedModal
-        index={index}
-        changePhotoId={changePhotoId}
-        currentPhoto={currentPhoto}
-        closeModal={closeModal}
-        navigation={false}
-      />
-    </div>
+    <div>Carousel</div>
   )
 }
+
+export default Carousel
