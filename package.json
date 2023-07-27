@@ -1,6 +1,10 @@
 {
-  "private": true,
+  "private": false,
+  "homepage": "https://trippyyy333.github.io/DrMona/",
   "scripts": {
+    "predeploy" : "npm run build",
+		"deploy" : "gh-pages -d build",
+
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -27,6 +31,7 @@
     "@types/react": "18.0.25",
     "autoprefixer": "^10.4.13",
     "daisyui": "^3.5.0",
+    "gh-pages": "^5.0.0",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
